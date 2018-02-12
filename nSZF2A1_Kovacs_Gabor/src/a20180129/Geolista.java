@@ -6,8 +6,8 @@ package a20180129;
  */
 public class Geolista {
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new Modell();
-    }
+    }*/
     
 }
