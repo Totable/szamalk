@@ -3,9 +3,10 @@ package a20180129;
 public class Main {
 
   public static void main(String[] args) {
-    Modell modell=new Modell();
+      Modell.csv2bat();
+    /*Modell modell=new Modell();
     Nezet nezet=new Nezet(modell);
-    nezet.setVisible(true);
+    nezet.setVisible(true);*/
     
 //    for (char betu = 'a'; betu <= 'z'; betu++)
 //      System.out.print(betu);
