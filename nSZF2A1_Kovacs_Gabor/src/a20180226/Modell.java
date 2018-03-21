@@ -19,6 +19,7 @@ public class Modell {
     private static String API_KEY="&appid=2018310bfdb382b812c131040caf5194";
     public static String urlTeszt(String varos){
     return API_URL+varos+API_KEY;
+    
     }
     private static File csv= new File("./files/capitals.csv");
     private static ArrayList<String> lista= new ArrayList<String>();
