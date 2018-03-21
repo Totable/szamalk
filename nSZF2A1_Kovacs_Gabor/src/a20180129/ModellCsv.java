@@ -81,13 +81,13 @@ class TelepulesTelepulesresz implements Comparable<TelepulesTelepulesresz> { //P
     }
 }
 
-public class Modell {
+public class ModellCsv {
 
     private File csvFajl = new File("./files/geolista.csv");
     private ArrayList<TelepulesTelepulesresz> geoLista
             = new ArrayList<>();
 
-    public Modell() {
+    public ModellCsv() {
         geoLista = geoListaFeltolt();
 //    teszt();
     }
@@ -148,56 +148,54 @@ public class Modell {
         } catch (Exception e2) {
             System.out.println("Hiba: nincs meg a fájl. (9875974)" + e2);
         }
-       
+
         //ArrayList<Telepules> telepulesList= new ArrayList<>();
         TreeSet<Telepules> telepulesHalmaz = new TreeSet<>(
-                new Comparator<Telepules>(){
-                        @Override 
-                        public int compare(Telepules t1, Telepules t2){
-                        String s1 = t1.getMegyekodMegyenev().getMegyenev()+t1.getTelepulesnev();
-                        String s2 = t2.getMegyekodMegyenev().getMegyenev()+t2.getTelepulesnev();
-                        return (s1).compareTo(s2);
-                        }
-                });
+                new Comparator<Telepules>() {
+            @Override
+            public int compare(Telepules t1, Telepules t2) {
+                String s1 = t1.getMegyekodMegyenev().getMegyenev() + t1.getTelepulesnev();
+                String s2 = t2.getMegyekodMegyenev().getMegyenev() + t2.getTelepulesnev();
+                return (s1).compareTo(s2);
+            }
+        });
         try {
             br.readLine();
-        while ((sor = br.readLine()) != null) {
-            String[] dSor = sor.split(";");
-            String telepulesnev = dSor[1];
-            String megyekod = dSor[2];
-            int nepesseg = Integer.parseInt(dSor[8]);
-            int i = 0;
-            while (!megyeList.get(i).getMegyekod().equals(megyekod)) {
-                i++;
-                MegyekodMegyenev mn = megyeList.get(i);
-                //telepulesList.add(new Telepules(telepulesnev, mn, nepesseg));
-                telepulesHalmaz.add(new Telepules(telepulesnev, mn, nepesseg));
+            while ((sor = br.readLine()) != null) {
+                String[] dSor = sor.split(";");
+                String telepulesnev = dSor[1];
+                String megyekod = dSor[2];
+                int nepesseg = Integer.parseInt(dSor[8]);
+                int i = 0;
+                while (!megyeList.get(i).getMegyekod().equals(megyekod)) {
+                    i++;
+                    MegyekodMegyenev mn = megyeList.get(i);
+                    //telepulesList.add(new Telepules(telepulesnev, mn, nepesseg));
+                    telepulesHalmaz.add(new Telepules(telepulesnev, mn, nepesseg));
+                }
             }
-        }
-        br.close();
-    }
-    catch (Exception e
-
-    
-        ) {
+            br.close();
+        } catch (Exception e) {
             System.out.println(e);
-    }
-    //tesztfor(Telepules telepules:telepulesHalmaz){
-    File datDajl= new File("");
+        }
+        //tesztfor(Telepules telepules:telepulesHalmaz){
+        File datDajl = new File("C:\\Users\\Misaka\\Documents\\NetBeansProjects\\szamalk\\nSZF2A1_Kovacs_Gabor\\files\\megyek_telepulesek.dat");
         try {
-            ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(datDajl));
-            for(Telepules telepules:telepulesHalmaz){
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(datDajl));
+            for (Telepules telepules : telepulesHalmaz) {
                 oos.writeObject(telepules);
-        /*System.out.print(telepules.getTelepulesnev() + "\t");
+                /*System.out.print(telepules.getTelepulesnev() + "\t");
         System.out.print(telepules.getMegyekodMegyenev() + "\t");
         System.out.println(telepules.getNepesseg());*/
-    }
+                //oos.close();
+            }
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
 
-class MegyekodMegyenev {
+class MegyekodMegyenev implements Serializable {
 
     private String megyekod, megyenev;
 
@@ -215,7 +213,7 @@ class MegyekodMegyenev {
     }
 }
 
-class Telepules implements Serializable{
+class Telepules implements Serializable {
 
     private String telepulesnev;
     private MegyekodMegyenev megyekodMegyenev;

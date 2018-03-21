@@ -9,13 +9,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 public class Nezet extends JFrame {
-  private final Modell MODELL; //=null;
+  private final ModellCsv MODELL; //=null;
   private DefaultMutableTreeNode faGyoker=
     new DefaultMutableTreeNode("Település -> Településrész");
   private DefaultTreeModel faModell=new DefaultTreeModel(faGyoker);
   private JTree tFa=new JTree(faModell);
   
-  public Nezet(final Modell MODELL) {
+  public Nezet(final ModellCsv MODELL) {
     this.MODELL=MODELL;
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setTitle("Geolista 1.0");
